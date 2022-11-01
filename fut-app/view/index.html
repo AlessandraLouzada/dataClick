@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="assets/css/main.css" rel="stylesheet" />
+    <title>Fut App</title>
+  </head>
+  <body>
+    <header>
+      <img id = "logo" src="assets/images/logo.png" alt="" />
+      <nav class="nav-menu d-none d-lg-block">
+
+        <ul>
+
+          <li class="active"><a id="tagClube">Clubes</a></li>
+
+          <li><a id="tagUsuario">Usuários</a></li>
+
+          <li><a id="tagAssociar">Associação</a></li>
+
+          <li><a id="tagDetalhes">Detalhes do Usuário</a></li>
+
+        </ul>
+
+      </nav>
+    </header>
+    <main>
+      <section id="clube"  style= "display: none;">
+        <h2>Clube</h2>
+        <button type='button' id="inserir"> Inserir clube</button>
+        <button type='button' id="listar"> Listar clubes</button>
+        <button type='button' id="remover"> Remover clube</button>
+        <button type='button' id="editar"> Editar clube</button>
+      </section>
+
+      <section id="usuario"  style= "display: none;">
+        <h2>Usuário</h2>
+        <button type='button' id="inserirUsuario"> Inserir usuário</button>
+        <button type='button' id="listarUsuario"> Listar usuários</button>
+        <button type='button' id="removerUsuario"> Remover usuário</button>
+        <button type='button' id="editarUsuario"> Editar usuário</button>
+      </section>
+
+      <section id="associar"  style= "display: none;">
+        <h2>Associar</h2>
+        <div id="dado_link">
+          Usuario: <input type="text" id="idUsuario" size="4" maxlength="4" placeholder="Insira o id do usuário" color: black; value=""> <br>
+          Clube: <input type="text" id="idClube" size="4" maxlength="4" placeholder="Insira o id do clube" color: black; value=""> <br>
+          <input id="botao_submit" type="submit" value="Associar">
+        </div>
+      </section>
+
+      <section id="detalhes"  style= "display: none;">
+        <h2>Detalhes Usuario</h2>
+        Id Usuario: <input type="text" id="idUsuarioDetalhes" size="4" maxlength="4" placeholder="Insira o id do usuário que deseja consultar" color: black; value=""> <br>
+        <input id="detalhes_submit" type="submit" value="Pesquisar">
+      </section>
+
+      <br><section id="inserirNome" style= "display: none;">
+        Nome: <input type="text" id="name" size="100" maxlength="100" placeholder="Insira o nome" color: black; value=""> <br><br>
+        <input id="inserir_submit" type="submit" value="">
+      </section>
+
+      <br><section id="editarNome" style= "display: none;">
+        Id: <input type="text" id="id" size="4" maxlength="4" placeholder="Insira o id do nome a ser editado" color: black; value=""> <br>
+        Nome: <input type="text" id="nameEditar" size="100" maxlength="100" placeholder="Insira o nome editado" color: black; value=""> <br><br>
+        <input id="editar_submit" type="submit" value="">
+      </section>
+
+      <br><section id="removerNome" style= "display: none;">
+        Id: <input type="text" id="idRemover" size="4" maxlength="4" placeholder="Insira o id a ser removido" color: black; value=""> <br>
+       <input id="remover_submit" type="submit" value="">
+      </section>
+
+      <section id="lista">
+      </section>
+
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+  </body>
+</html>
+<script>
+  const uri = 'http://localhost/api_restful/public_html/api/tarefas/';
+  function setStatus(dado){
+    const item = {
+      idFatura: dado,
+      tabela: 'fatura'
+    };
+  
+    fetch(uri, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item)
+    })
+      .then(response => response.json())
+      .then(() => {
+        alert("Fatura paga com sucesso");
+        window.location.reload(true);
+      })
+      .catch(error => alert('Nao foi possivel associar item.'));  
+  }  
+</script>
